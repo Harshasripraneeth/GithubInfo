@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        >
+
+        <TextView
+            android:id="@+id/tvreponame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvrepodescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="15dp"
+            android:maxLines="3"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvrepolanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="92dp"
+            android:layout_marginBottom="7dp"
+            android:text="TextView" />
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
