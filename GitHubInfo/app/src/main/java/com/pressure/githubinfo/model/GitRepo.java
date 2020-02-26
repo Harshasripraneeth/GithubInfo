@@ -10,6 +10,9 @@ public class GitRepo {
     @SerializedName("language")
     private String language;
 
+    //for the activity of progress bar
+    private boolean inprogress;
+
     public GitRepo(String name, String description, String language) {
         this.name = name;
         this.description = description;

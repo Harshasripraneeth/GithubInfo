@@ -7,12 +7,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pressure.githubinfo.R;
+import com.pressure.githubinfo.UI.RepositoryActivity;
 import com.pressure.githubinfo.client.GitReposEndPoint;
 import com.pressure.githubinfo.apiservice.APIService;
+import com.pressure.githubinfo.databinding.ActivityRepositoryBinding;
+import com.pressure.githubinfo.databinding.AdapterLayoutBinding;
 import com.pressure.githubinfo.model.GitRepo;
+import com.pressure.githubinfo.model.GitUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +31,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewholder> {
     List<GitRepo> repolist;
     Context context;
     String user;
+
     public Adapter(Context context,String user)
     {
         this.context = context;
@@ -33,36 +39,23 @@ public class Adapter extends RecyclerView.Adapter<Adapter.viewholder> {
     }
     class viewholder extends RecyclerView.ViewHolder
     {
-        TextView tvname;
-        TextView tvdescription;
-        TextView tvlanguage;
-
-        public viewholder(@NonNull View itemView) {
-            super(itemView);
-            tvname = itemView.findViewById(R.id.tvreponame);
-            tvdescription = itemView.findViewById(R.id.tvrepodescription);
-            tvlanguage = itemView.findViewById(R.id.tvrepolanguage);
+        AdapterLayoutBinding adapterLayoutBinding;
+        public viewholder(@NonNull AdapterLayoutBinding itemView) {
+            super(itemView.getRoot());
+            adapterLayoutBinding = itemView;
         }
     }
     @NonNull
     @Override
     public Adapter.viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_layout,parent,false);
-        return new viewholder(v);
+        AdapterLayoutBinding adapterLayoutBinding= DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.adapter_layout,parent,false);
+        return new viewholder(adapterLayoutBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Adapter.viewholder holder, int position) {
-        holder.tvname.setText(list.get(position).getName());
-        if(list.get(position).getDescription() !=null)
-            holder.tvdescription.setText(list.get(position).getDescription());
-         else
-            holder.tvdescription.setText("not entered");
-        if(list.get(position).getLanguage() !=null)
-            holder.tvlanguage.setText("Language :"+list.get(position).getLanguage());
-        else
-            holder.tvlanguage.setText("Language: not entered");
-
+        GitRepo repo = list.get(position);
+        holder.adapterLayoutBinding.setRepo(repo);
     }
 
     @Override

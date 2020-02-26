@@ -1,6 +1,7 @@
 package com.pressure.githubinfo.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,28 +11,24 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.pressure.githubinfo.R;
+import com.pressure.githubinfo.databinding.ActivityRepositoryBinding;
 import com.pressure.githubinfo.methods.Adapter;
 
 public class RepositoryActivity extends AppCompatActivity {
-    TextView textView;
-    RecyclerView recyclerView;
-    ProgressBar progressBar;
+
+    ActivityRepositoryBinding repositoryBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_repository);
-        textView = findViewById(R.id.textView);
-        String user =getIntent().getStringExtra("userName");
-        textView.setText("The Login name is "+user);
-         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(RepositoryActivity.this));
-        Adapter adapter = new Adapter(RepositoryActivity.this,user);
-        progressBar = findViewById(R.id.progressBar1);
-        progressBar.setVisibility(View.VISIBLE);
+        repositoryBinding = DataBindingUtil.setContentView(this,R.layout.activity_repository);
+        repositoryBinding.setUser("The Login name is "+getIntent().getStringExtra("userName"));
+        repositoryBinding.recyclerView.setHasFixedSize(true);
+        repositoryBinding.recyclerView.setLayoutManager(new LinearLayoutManager(RepositoryActivity.this));
+        Adapter adapter = new Adapter(RepositoryActivity.this,getIntent().getStringExtra("userName"));
+        repositoryBinding.setInprogress(true);
         adapter.loadData();
-        recyclerView.setAdapter(adapter);
-        progressBar.setVisibility(View.GONE);
+        repositoryBinding.recyclerView.setAdapter(adapter);
+        repositoryBinding.setInprogress(false);
     }
 }

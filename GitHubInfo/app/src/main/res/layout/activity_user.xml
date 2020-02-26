@@ -1,153 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".UI.UserActivity">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="user"
+            type="com.pressure.githubinfo.model.GitUser" />
+        <variable
+            name="inprogress"
+            type="Boolean" />
+    </data>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="76dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="110dp"
-        android:layout_height="98dp"
-        android:layout_marginStart="78dp"
-        android:layout_marginLeft="78dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="223dp"
-        android:layout_marginRight="223dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="76dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="240dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{inprogress? View.VISIBLE : View.GONE}"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/tvlogin"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="78dp"
-        android:layout_marginLeft="78dp"
-        android:layout_marginTop="32dp"
-        android:gravity="left"
-        android:text="Loading"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="110dp"
+            android:layout_height="98dp"
+            android:layout_marginStart="78dp"
+            android:layout_marginLeft="78dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="223dp"
+            android:layout_marginRight="223dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tvuserName"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="79dp"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="132dp"
-        android:layout_marginRight="132dp"
-        android:text="Loading"
-        android:gravity="left"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvlogin" />
+        <TextView
+            android:id="@+id/tvlogin"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="78dp"
+            android:layout_marginLeft="78dp"
+            android:layout_marginTop="32dp"
+            android:gravity="left"
+            android:text="@{user.login}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <TextView
-        android:id="@+id/tvfollower"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginTop="12dp"
-        android:gravity="left"
-        android:text="Loading"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvuserName" />
+        <TextView
+            android:id="@+id/tvuserName"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="132dp"
+            android:layout_marginRight="132dp"
+            android:gravity="left"
+            android:text="@{user.isDataEmpty(user.name)? user.getEmptyString(user.name) : user.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvlogin"
+            app:layout_constraintTop_toBottomOf="@+id/tvlogin" />
 
-    <TextView
-        android:id="@+id/tvfollowing"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="78dp"
-        android:layout_marginLeft="78dp"
-        android:layout_marginTop="12dp"
-        android:text="Loading"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvfollower" />
+        <TextView
+            android:id="@+id/tvfollower"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="80dp"
+            android:gravity="left"
+            android:text="@{user.isDataEmpty(user.follower)? user.getEmptyString(user.follower) : user.follower}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvuserName"
+            app:layout_constraintTop_toBottomOf="@+id/tvuserName" />
 
-    <TextView
-        android:id="@+id/tvemail"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="78dp"
-        android:layout_marginLeft="78dp"
-        android:layout_marginTop="16dp"
-        android:text="Loading"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvfollowing" />
+        <TextView
+            android:id="@+id/tvfollowing"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="12dp"
+            android:text="@{user.isDataEmpty(user.following)? user.getEmptyString(user.following) : user.following}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvfollower"
+            app:layout_constraintTop_toBottomOf="@+id/tvfollower" />
 
-    <TextView
-        android:id="@+id/tvCreatedAt"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="79dp"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="132dp"
-        android:layout_marginRight="132dp"
-        android:gravity="left"
-        android:text="Loading"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvemail" />
+        <TextView
+            android:id="@+id/tvemail"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="12dp"
+            android:text="@{user.isDataEmpty(user.email)? user.getEmptyString(user.email) : user.email}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvfollowing"
+            app:layout_constraintTop_toBottomOf="@+id/tvfollowing" />
 
-    <TextView
-        android:id="@+id/tvUpdatedAt"
-        android:layout_width="200dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="79dp"
-        android:layout_marginLeft="79dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="132dp"
-        android:layout_marginRight="132dp"
-        android:gravity="left"
-        android:text="Loading"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCreatedAt" />
+        <TextView
+            android:id="@+id/tvCreatedAt"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="12dp"
+            android:gravity="left"
+            android:text="@{user.created}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tvemail"
+            app:layout_constraintTop_toBottomOf="@+id/tvemail" />
 
-    <Button
-        android:id="@+id/btnrepositories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="193dp"
-        android:layout_marginRight="193dp"
-        android:layout_marginBottom="162dp"
-        android:text="Show Repositories"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUpdatedAt" />
+        <TextView
+            android:id="@+id/tvUpdatedAt"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="132dp"
+            android:layout_marginRight="132dp"
+            android:gravity="left"
+            android:text="@{user.updated}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvCreatedAt"
+            app:layout_constraintTop_toBottomOf="@+id/tvCreatedAt" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnrepositories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="130dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="193dp"
+            android:layout_marginRight="193dp"
+            android:layout_marginBottom="162dp"
+            android:text="Show Repositories"
+            android:visibility="@{inprogress? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvUpdatedAt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,5 +1,9 @@
 package com.pressure.githubinfo.model;
 
+import android.graphics.Bitmap;
+
+import androidx.databinding.Bindable;
+
 import com.google.gson.annotations.SerializedName;
 
 public class GitUser {
@@ -30,7 +34,11 @@ public class GitUser {
     @SerializedName("updated_at")
     private String updated;
 
-    public GitUser(String login, String name, String follower, String following, String email, String created, String updated,String profileavatar) {
+    //for visibility of progress bar and show repositories button
+    private boolean completed = false;
+
+
+    public GitUser(String login, String name, String follower, String following, String email, String created, String updated, String profileavatar) {
         this.setLogin(login);
         this.setName(name);
         this.setFollower(follower);
@@ -40,7 +48,17 @@ public class GitUser {
         this.setUpdated(updated);
         this.setProfileavatar(profileavatar);
     }
+    public boolean isDataEmpty(String s)
+    {
+        if( s.indexOf("null")!= -1)
+            return true;
 
+        return false;
+    }
+    public String getEmptyString(String s)
+    {
+        return s.replace("null","NOT ENTERED");
+    }
     public String getLogin() {
         return login;
     }
